@@ -1,0 +1,131 @@
+definitions:
+  dto.ApiAdd:
+    properties:
+      name:
+        type: string
+      price:
+        type: string
+      sn:
+        type: string
+      ts:
+        type: string
+    type: object
+  middleware.Response:
+    properties:
+      code:
+        type: integer
+      data:
+        type: object
+      msg:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /sn/create:
+    get:
+      consumes:
+      - application/json
+      description: sign接口
+      operationId: /sn/create
+      parameters:
+      - description: 名称
+        in: query
+        name: name
+        required: true
+        type: string
+      - description: 价格
+        in: query
+        name: price
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.ApiAdd'
+              type: object
+      summary: sign接口
+      tags:
+      - sign 创建接口
+  /v1/product/add:
+    get:
+      consumes:
+      - application/json
+      description: api接口
+      operationId: /v1/product/add
+      parameters:
+      - description: 名称
+        in: query
+        name: name
+        required: true
+        type: string
+      - description: 价格
+        in: query
+        name: price
+        required: true
+        type: string
+      - description: 过期时间
+        in: query
+        name: ts
+        required: true
+        type: string
+      - description: 签名
+        in: query
+        name: sn
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.ApiAdd'
+              type: object
+      summary: api接口
+      tags:
+      - v1 add接口
+  /v2/product/add:
+    get:
+      consumes:
+      - application/json
+      description: api接口
+      operationId: /v2/product/add
+      parameters:
+      - description: 名称
+        in: query
+        name: name
+        required: true
+        type: string
+      - description: 价格
+        in: query
+        name: price
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.ApiAdd'
+              type: object
+      summary: api接口
+      tags:
+      - v2 add接口
+swagger: "2.0"
