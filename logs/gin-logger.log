@@ -1,0 +1,1 @@
+time="2021-01-08 15:40:55.704997+08:00" level=info client_ip=172.16.56.116 latency_time="19.231µs" req_method=GET req_uri="/v1/product/add?name=a&price=10&ts=1610091644&sn=ae4d43cb078dafe9a78baacf86b204c2" status_code=200

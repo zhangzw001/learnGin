@@ -43,7 +43,7 @@ func CreateSign(params url.Values) string {
 		}
 	}
 	// 自定义签名算法
-	sign := MD5(MD5(str) + MD5(config.APP_NAME + config.APP_SECRET))
+	sign := MD5(MD5(str) + MD5(config.AppName+ config.AppSecret))
 	return sign
 }
 
@@ -72,7 +72,7 @@ func VerifySign(c *gin.Context) {
 		return
 	}
 
-	exp, _ := strconv.ParseInt(config.API_EXPIRY, 10, 64)
+	exp, _ := strconv.ParseInt(config.ApiExpiry, 10, 64)
 
 	// 验证过期时间
 	if ts > GetTimeUnix() || GetTimeUnix() - ts >= exp {
@@ -85,6 +85,8 @@ func VerifySign(c *gin.Context) {
 		ResponseError(c,10001,errors.New("Sn Error"))
 		return
 	}
+	//
+	c.Next()
 }
 
 

@@ -22,7 +22,7 @@ func InitRouter(e *gin.Engine) {
 
 	// v1版本
 	GroupV1 := e.Group("/v1")
-	GroupV1.Use(middleware.SignMiddleware())
+	GroupV1.Use(middleware.SignMiddleware(),middleware.LoggerToFile())
 	{
 		api.Register(GroupV1)
 	}

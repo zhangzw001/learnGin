@@ -11,6 +11,7 @@ require (
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/pkg/errors v0.9.1
+	github.com/sirupsen/logrus v1.7.0
 	github.com/swaggo/gin-swagger v1.3.0
 	github.com/swaggo/swag v1.7.0
 	github.com/ugorji/go v1.2.2 // indirect

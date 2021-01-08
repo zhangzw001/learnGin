@@ -3,8 +3,11 @@ package config
 
 
 const (
-	PORT  = ":8000"
-	APP_NAME = "test"
-	APP_SECRET = "test.123"
-	API_EXPIRY = "120"
+	PORT      = ":8000"
+	AppName   = "test"
+	AppSecret = "test.123"
+	ApiExpiry = "120"
+
+	LogFilePath = "logs"
+	LogFileName = "gin-logger.log"
 )
