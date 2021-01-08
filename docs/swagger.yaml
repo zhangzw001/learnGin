@@ -4,11 +4,20 @@ definitions:
       name:
         type: string
       price:
-        type: string
+        type: integer
       sn:
         type: string
       ts:
         type: string
+    type: object
+  dto.ApiUpdateInput:
+    properties:
+      name:
+        example: abc
+        type: string
+      price:
+        example: 10
+        type: integer
     type: object
   middleware.Response:
     properties:
@@ -96,6 +105,34 @@ paths:
       summary: api接口
       tags:
       - v1 add接口
+  /v1/product/update:
+    post:
+      consumes:
+      - application/json
+      description: api接口
+      operationId: /v1/product/update
+      parameters:
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ApiUpdateInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.ApiAdd'
+              type: object
+      summary: api接口
+      tags:
+      - v1 update接口
   /v2/product/add:
     get:
       consumes:

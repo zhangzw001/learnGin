@@ -24,13 +24,19 @@ func Register2(router *gin.RouterGroup) {
 // @Success 200 {object} middleware.Response{data=dto.ApiAdd} "success"
 // @Router /v2/product/add [get]
 func (api Controller2) Add(c *gin.Context) {
-	// 获取 Get 参数
-	name := c.Query("name")
-	price := c.DefaultQuery("price", "100")
+	params := &dto.ApiAddInput{}
+	err := params.BindValueParam(c)
+	if err != nil {
+		middleware.ResponseError(c,10001,err)
+	}
 
+	//// 获取 Get 参数
+	//name := c.Query("name")
+	//price := c.DefaultQuery("price", "100")
+	//
 	data := dto.ApiAdd{
-		Name:  name,
-		Price: price,
+		Name:  params.Name,
+		Price: params.Price,
 	}
 	middleware.ResponseSuccess(c,data)
 

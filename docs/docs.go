@@ -142,6 +142,53 @@ var doc = `{
                 }
             }
         },
+        "/v1/product/update": {
+            "post": {
+                "description": "api接口",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "v1 update接口"
+                ],
+                "summary": "api接口",
+                "operationId": "/v1/product/update",
+                "parameters": [
+                    {
+                        "description": "body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.ApiUpdateInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/middleware.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/dto.ApiAdd"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
         "/v2/product/add": {
             "get": {
                 "description": "api接口",
@@ -203,13 +250,26 @@ var doc = `{
                     "type": "string"
                 },
                 "price": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "sn": {
                     "type": "string"
                 },
                 "ts": {
                     "type": "string"
+                }
+            }
+        },
+        "dto.ApiUpdateInput": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "abc"
+                },
+                "price": {
+                    "type": "integer",
+                    "example": 10
                 }
             }
         },

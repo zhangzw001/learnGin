@@ -10,4 +10,8 @@ const (
 
 	LogFilePath = "logs"
 	LogFileName = "gin-logger.log"
+
+
+	ValidatorKey        = "ValidatorKey"
+
 )

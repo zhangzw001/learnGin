@@ -4,17 +4,17 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/zhangzw001/learnGin/dto"
 	"github.com/zhangzw001/learnGin/middleware"
-	"net/url"
+	"github.com/zhangzw001/learnGin/public"
+	"log"
 	"strconv"
 )
 
-type Controller struct {}
+type Controller struct{}
+
 func RegisterSign(router *gin.RouterGroup) {
 	sign := Controller{}
 	router.GET("/create", sign.Create)
 }
-
-
 
 // Add godoc
 // @Summary sign接口
@@ -28,22 +28,24 @@ func RegisterSign(router *gin.RouterGroup) {
 // @Success 200 {object} middleware.Response{data=dto.ApiAdd} "success"
 // @Router /sn/create [get]
 func (sign Controller) Create(c *gin.Context) {
-	ts := strconv.FormatInt(middleware.GetTimeUnix(), 10)
-	name := c.Query("name")
-	price := c.Query("price")
-	params := url.Values{
-		"name"  : []string{name},
-		"price" : []string{price},
-		"ts"    : []string{ts},
+	ts := strconv.FormatInt(public.GetTimeUnix(), 10)
+
+	params := &dto.ApiUpdateInput{}
+	err := params.BindValueParam(c)
+	if err != nil {
+		middleware.ResponseError(c, 10001, err)
 	}
+
+	paramsSign := c.Request.Form
+	paramsSign["ts"] = []string{ts}
 
 	data := dto.ApiAdd{
-		Name:  name,
-		Price: price,
+		Name:  params.Name,
+		Price: params.Price,
 		Ts:    ts,
-		Sn:    middleware.CreateSign(params),
+		Sn:    public.CreateSign(paramsSign),
 	}
-
-	middleware.ResponseSuccess(c,data)
+	log.Println(data)
+	middleware.ResponseSuccess(c, data)
 
 }
