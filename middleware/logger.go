@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
 	"github.com/sirupsen/logrus"
-	config "github.com/zhangzw001/learnGin/config/dev"
+	config2 "github.com/zhangzw001/learnGin/config"
 	"log"
 	"os"
 	"path"
@@ -13,8 +13,8 @@ import (
 
 // 日志记录到文件
 func LoggerToFile() gin.HandlerFunc {
-	logFilePath := config.LogFilePath
-	logFileName := config.LogFileName
+	logFilePath := config2.LogFilePath
+	logFileName := config2.LogFileName
 
 	// 日志文件
 	fileName := path.Join(logFilePath,logFileName)

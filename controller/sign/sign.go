@@ -1,11 +1,10 @@
-package sign
+package controllersign
 
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/zhangzw001/learnGin/dto"
 	"github.com/zhangzw001/learnGin/middleware"
 	"github.com/zhangzw001/learnGin/public"
-	"log"
 	"strconv"
 )
 
@@ -34,18 +33,18 @@ func (sign Controller) Create(c *gin.Context) {
 	err := params.BindValueParam(c)
 	if err != nil {
 		middleware.ResponseError(c, 10001, err)
+		return
 	}
 
 	paramsSign := c.Request.Form
 	paramsSign["ts"] = []string{ts}
 
-	data := dto.ApiAdd{
+	data := dto.ApiOutput{
 		Name:  params.Name,
 		Price: params.Price,
 		Ts:    ts,
 		Sn:    public.CreateSign(paramsSign),
 	}
-	log.Println(data)
 	middleware.ResponseSuccess(c, data)
 
 }

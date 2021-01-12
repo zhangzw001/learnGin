@@ -15,23 +15,24 @@ func InitRouter(e *gin.Engine) {
 	e.GET("/swagger/*any",ginSwagger.WrapHandler(swaggerFiles.Handler))
 	// sign
 	Sign := e.Group("/sn")
-	Sign.Use(middleware.ValidatorMiddleware())
+	Sign.Use(middleware.TranslationMiddleware())
 	{
-		sign.RegisterSign(Sign)
+		controllersign.RegisterSign(Sign)
+
 	}
 
 
 	// v1版本
 	GroupV1 := e.Group("/v1")
-	GroupV1.Use(middleware.SignMiddleware(),middleware.LoggerToFile(),middleware.ValidatorMiddleware())
+	GroupV1.Use(middleware.SignMiddleware(),middleware.LoggerToFile(),middleware.TranslationMiddleware())
 	{
-		api.Register(GroupV1)
+		controllerapi.Register(GroupV1)
 	}
 
 	// v2版本
 	GroupV2 := e.Group("/v2")
 	{
-		api.Register2(GroupV2)
+		controllerapi.Register2(GroupV2)
 	}
 
 

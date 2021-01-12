@@ -1,7 +1,5 @@
 package config
 
-
-
 const (
 	PORT      = ":8000"
 	AppName   = "test"
@@ -11,7 +9,6 @@ const (
 	LogFilePath = "logs"
 	LogFileName = "gin-logger.log"
 
-
-	ValidatorKey        = "ValidatorKey"
-
+	ValidatorKey  = "ValidatorKey"
+	TranslatorKey = "TranslatorKey"
 )

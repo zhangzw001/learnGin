@@ -9,6 +9,8 @@ type ResponseCode int
 
 const (
 	SuccessCode ResponseCode = 200 + iota
+	StatusCreated
+	StatusAccepted
 	InternalServerError ResponseCode = 500
 	CustomizeCode           = 1000
 	)

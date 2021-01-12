@@ -1,4 +1,4 @@
-package api
+package controllerapi
 
 import (
 	"github.com/gin-gonic/gin"
@@ -21,20 +21,21 @@ func Register2(router *gin.RouterGroup) {
 // @Produce  json
 // @Param name query string true "名称"
 // @Param price query string true "价格"
-// @Success 200 {object} middleware.Response{data=dto.ApiAdd} "success"
+// @Success 200 {object} middleware.Response{data=dto.ApiOutput} "success"
 // @Router /v2/product/add [get]
 func (api Controller2) Add(c *gin.Context) {
 	params := &dto.ApiAddInput{}
 	err := params.BindValueParam(c)
 	if err != nil {
 		middleware.ResponseError(c,10001,err)
+		return
 	}
 
 	//// 获取 Get 参数
 	//name := c.Query("name")
 	//price := c.DefaultQuery("price", "100")
 	//
-	data := dto.ApiAdd{
+	data := dto.ApiOutput{
 		Name:  params.Name,
 		Price: params.Price,
 	}

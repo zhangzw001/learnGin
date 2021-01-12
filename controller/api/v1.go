@@ -1,4 +1,4 @@
-package api
+package controllerapi
 
 import (
 	"github.com/gin-gonic/gin"
@@ -26,7 +26,7 @@ func Register(router *gin.RouterGroup) {
 // @Param price query string true "价格"
 // @Param ts query string true "过期时间"
 // @Param sn query string true "签名"
-// @Success 200 {object} middleware.Response{data=dto.ApiAdd} "success"
+// @Success 200 {object} middleware.Response{data=dto.ApiOutput} "success"
 // @Router /v1/product/add [get]
 func (api Controller) Add(c *gin.Context) {
 	// 获取 Get 参数
@@ -41,7 +41,7 @@ func (api Controller) Add(c *gin.Context) {
 	//price := c.DefaultQuery("price", "100")
 	//ts := c.Query("ts")
 	//sn := c.Query("sn")
-	data := dto.ApiAdd{
+	data := dto.ApiOutput{
 		Name:  params.Name,
 		Price: params.Price,
 		Ts:    params.Ts,
@@ -62,7 +62,7 @@ func (api Controller) Add(c *gin.Context) {
 // @Accept  json
 // @Produce  json
 // @Param body body dto.ApiUpdateInput true "body"
-// @Success 200 {object} middleware.Response{data=dto.ApiAdd} "success"
+// @Success 200 {object} middleware.Response{data=dto.ApiOutput} "success"
 // @Router /v1/product/update [POST]
 func (api Controller) Update(c *gin.Context) {
 
@@ -70,6 +70,7 @@ func (api Controller) Update(c *gin.Context) {
 	err := input.BindValueParam(c)
 	if err != nil {
 		middleware.ResponseError(c,10001,err)
+		return
 	}
 
 	//
@@ -78,7 +79,7 @@ func (api Controller) Update(c *gin.Context) {
 	//ts := c.Query("ts")
 	//sn := c.Query("sn")
 	//
-	data := dto.ApiAdd{
+	data := dto.ApiOutput{
 		Name:  input.Name,
 		Price: input.Price,
 		//Ts:    ts,

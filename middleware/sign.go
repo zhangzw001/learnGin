@@ -3,7 +3,7 @@ package middleware
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
-	config "github.com/zhangzw001/learnGin/config/dev"
+	config2 "github.com/zhangzw001/learnGin/config"
 	"github.com/zhangzw001/learnGin/public"
 	"net/url"
 	"strconv"
@@ -33,7 +33,7 @@ func SignMiddleware() gin.HandlerFunc {
 			return
 		}
 
-		exp, _ := strconv.ParseInt(config.ApiExpiry, 10, 64)
+		exp, _ := strconv.ParseInt(config2.ApiExpiry, 10, 64)
 
 		// 验证过期时间
 		if ts > public.GetTimeUnix() || public.GetTimeUnix() - ts >= exp {
@@ -43,7 +43,7 @@ func SignMiddleware() gin.HandlerFunc {
 
 		// 验证签名
 		if sn == "" || sn != public.CreateSign(req) {
-			ResponseError(c,10001,errors.New("Sn Error"))
+			ResponseError(c,10002,errors.New("Sn Error"))
 			return
 		}
 		//

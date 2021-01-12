@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	config "github.com/zhangzw001/learnGin/config/dev"
+	"github.com/zhangzw001/learnGin/config"
 	"github.com/zhangzw001/learnGin/routers"
 )
 

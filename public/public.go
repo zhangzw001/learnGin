@@ -3,7 +3,7 @@ package public
 import (
 	"crypto/md5"
 	"fmt"
-	config "github.com/zhangzw001/learnGin/config/dev"
+	config2 "github.com/zhangzw001/learnGin/config"
 	"net/url"
 	"sort"
 	"time"
@@ -41,6 +41,6 @@ func CreateSign(params url.Values) string {
 		}
 	}
 	// 自定义签名算法
-	sign := MD5(MD5(str) + MD5(config.AppName+ config.AppSecret))
+	sign := MD5(MD5(str) + MD5(config2.AppName+config2.AppSecret))
 	return sign
 }
